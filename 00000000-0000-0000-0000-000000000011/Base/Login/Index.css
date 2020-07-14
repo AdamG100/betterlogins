@@ -1,0 +1,172 @@
+﻿BODY {
+    background: linear-gradient(135deg,#2f3640,#2f3640 80%);
+    color: #fff;
+}
+
+#loginSection {
+    bottom: 45%;
+    height: 325px;
+    left: 0;
+    margin: 0 auto;
+    margin-top: 100px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    max-width: 398px;
+}
+
+#loginSection .frame {
+    border: 1px solid;
+    padding: 36px 48px 36px;
+    background: linear-gradient(#23272A,#23272A 99%);
+    border-color: #23272A;
+    box-shadow: 0 16px 32px 0 rgba(0,0,0,.08);
+}
+
+#loginSection .k-dropdown,
+#loginSection .k-textbox {
+    width: 100%;
+}
+
+#loginSection input[type="submit"],
+#loginSection input[type="button"],
+#loginSection button {
+    width: 100%;
+}
+
+#loginSection input[type="checkbox"] {
+    width: 16px;
+}
+
+#loginSection .logo 
+{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#loginSection .recover
+{
+    display:block;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+#loginSection .field-validation-error {
+    display: block;
+}
+
+#loginSection .validation-summary-errors ul {
+    margin: 0;
+    padding: 0;
+}
+
+#loginSection .validation-summary-errors li {
+    display: inline;
+    list-style: none;
+    margin: 0;
+}
+
+.builtInCaptcha br:nth-of-type(2),
+.builtInCaptcha br:first-of-type {
+    display: none;
+}
+
+.k-textbox {
+    background-color: #2f3640;
+    border-color: #2f3640;
+    display: block;
+    height: 42px;
+    font-size: 14px;
+    line-height: 24px;
+    background-image: none;
+    border-radius: 2px;
+    -webkit-transition: border-color .24s ease,box-shadow .24s ease;
+    -o-transition: border-color .24s ease,box-shadow .24s ease;
+    transition: border-color .24s ease,box-shadow .24s ease;
+}
+
+.k-textbox:hover {
+    border-color: rgb(0, 76, 131);
+    outline: 0;
+}
+
+
+.k-textbox:focus {
+    transition: .24s;
+    border-color: rgb(0, 76, 131);
+}
+
+
+.k-textbox:focus, .k-textbox.k-state-focus, .k-textbox.k-state-focused, .k-textarea:focus, .k-textarea.k-state-focus, .k-textarea.k-state-focused {
+    border-color:  rgb(0, 76, 131);
+}
+
+ul {
+    padding-inline-start: 0px !important;
+}
+
+.k-button.k-primary {
+    color: #fff;
+    background-color: rgb(0, 76, 131);
+    border-color: rgb(0, 76, 131);
+    margin-bottom: 10% !important;
+}
+
+.k-button {
+    color: #fff;
+    background-color: rgb(0, 76, 131);
+    border-color: rgb(0, 76, 131);
+    background-image: none !important;
+}
+.k-button:hover {
+    color: #fff;
+    background-color: rgb(0, 76, 131);
+    border-color: rgb(0, 76, 131);
+    background-image: none !important;
+}
+
+.k-button.k-primary:hover, .k-button.k-primary.k-state-hover {
+    color: #fff;
+    background-color: rgb(0, 76, 131);
+    border-color: rgb(0, 76, 131);
+}
+
+.k-checkbox {
+    border-color: rgb(0, 76, 131);
+    color: #fff;
+    background-color: rgb(0, 76, 131);
+}
+
+.k-checkbox:hover {
+    border-color: rgb(0, 76, 131);
+    color: #fff;
+    background-color: rgb(0, 76, 131);
+}
+
+.remember-me {
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+.f-pass {
+    text-align: center;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+.text-light {
+    color: rgba(224,232,255,.8);
+    text-align: center;
+    font-family: inherit;
+    font-size: 14px;
+}
+.logincontainer-footer {
+    background-color: transparent;
+    margin-top: 20px;
+    border-top: 0;
+}
+
+a:hover {
+    transition: 0.3s; 
+}

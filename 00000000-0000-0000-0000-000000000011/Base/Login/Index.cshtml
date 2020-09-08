@@ -7,8 +7,15 @@
 }
 
 @section head{
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     @Styles.Render(this.GetTemplateFileUrl("Base/Login/Index.css", true))
 }
+
+
+
+
 
 <section id="loginSection">
     <div class="frame">
@@ -26,7 +33,7 @@
                         @if (Model.RequireToken)
                         {
                             @(Html.Kendo().TextBoxFor(m => m.UserName)
-                                .HtmlAttributes(new { placeholder="Enter username", @readonly = string.Empty }))
+                                .HtmlAttributes(new { @readonly = string.Empty }))
                         }
                         else
                         {
@@ -46,9 +53,6 @@
                                 .HtmlAttributes(new { type = "password" })
                                 .Value(Model.Password))
                             @Html.ValidationMessageFor(m => m.Password)
-                        </li>
-                        <li class="remember-me">
-                            @Html.Kendo().CheckBoxFor(m => m.RememberMe)
                         </li>
                         if (Model.Captcha == TCAdmin.SDK.Security.CaptchaType.ReCaptcha)
                         {
@@ -75,7 +79,11 @@
                             .HtmlAttributes(new { type = "number", pattern = "[0-9]*" }))
                         </li>
                     }
-                     <li>
+                    <li>
+                        @Html.Kendo().CheckBoxFor(m => m.RememberMe)
+                    </li>
+                    
+                    <li class="language">
                         @Html.LabelFor(m => m.Language)
                     </li>
                     <li>
@@ -94,6 +102,7 @@
                             @Html.ValidationMessageFor(m => m.Template)
                         </li>
                     }
+
                     <li>
                         @Html.ValidationSummary(true)
                     </li>
@@ -143,4 +152,19 @@
         });
         </text>
     }
+
+    //Fix for built in captcha invalid image
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('do-reload') == '1') {
+        url = replaceUrlParam(window.location.href, 'do-reload', '0');
+        window.location.href = url;
+    }
+    //Enables bootstrap tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
 </script>
+
+@this.ImportPlugins()
+

@@ -1,0 +1,66 @@
+﻿@using TCAdmin.SDK.Objects
+@using TCAdminOAuth.Models
+
+@{
+    var isOAuthError = Request["OAuthError"] != null;
+}
+<script>
+
+@if (isOAuthError)
+{
+    <text>
+        $(document).ready(function() {
+            TCAdmin.Ajax.ShowBasicDialog('OAuth Login', '@Request["OAuthError"]')
+        });
+    </text>
+}
+
+    const recoverSection = document.getElementsByClassName("recover")[0].parentNode;
+    let socialsDiv = document.createElement("div");
+    
+    socialsDiv.innerHTML = `
+    <div class="divider">
+        <strong class="divider-title">or</strong>
+    </div>
+    @try
+    {
+        ObjectBase.GlobalSkipSecurityCheck = true;
+        foreach (var providerName in Enum.GetNames(typeof(OAuthProvider)))
+        {
+            //here
+            var provider = providerName.ParseToProviderEnum();
+            if (provider.ToBase().GetConfiguration().Enabled)
+            
+            {
+                <text>
+                @if (provider == OAuthProvider.Whmcs)
+                {
+                    <div class="btn-group" role="group">
+                        <a href="/OAuth/Login?provider=@provider">
+                            <button type="button" class="btn btn-@providerName" data-toggle="tooltip" data-placement="bottom" title="Sign in with @providerName" ><span class="fab fa-@(providerName.ToLower())"></span></button>
+                        </a>
+                    </div>
+
+                    continue;
+                }
+                    <div class="btn-group" role="group">
+                        <a href="/OAuth/Login?provider=@provider">
+                            <button type="button" class="btn btn-@providerName" data-toggle="tooltip" data-placement="bottom" title="Sign in with @providerName" ><span class="fab fa-@(providerName.ToLower())"></span></button>
+                        </a>
+                    </div>
+
+
+         </text>
+
+            }
+        }
+    }
+    finally
+    {
+        ObjectBase.GlobalSkipSecurityCheck = false;
+    }
+
+    `
+    recoverSection.append(socialsDiv);
+</script>
+

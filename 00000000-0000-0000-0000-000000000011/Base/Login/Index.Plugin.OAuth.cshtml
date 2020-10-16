@@ -1,11 +1,12 @@
 ﻿@using TCAdmin.SDK.Objects
+@using TCAdminOAuth.Configurations
 @using TCAdminOAuth.Models
 
 @{
     var isOAuthError = Request["OAuthError"] != null;
 }
-<script>
 
+<script>
 @if (isOAuthError)
 {
     <text>
@@ -13,8 +14,7 @@
             TCAdmin.Ajax.ShowBasicDialog('OAuth Login', '@Request["OAuthError"]')
         });
     </text>
-}
-
+} 
     const recoverSection = document.getElementsByClassName("recover")[0].parentNode;
     let socialsDiv = document.createElement("div");
     
@@ -25,34 +25,23 @@
     @try
     {
         ObjectBase.GlobalSkipSecurityCheck = true;
-        foreach (var providerName in Enum.GetNames(typeof(OAuthProvider)))
+        foreach (var provider in OAuthProvider.GetAll().Where(provider => provider.Configuration.Parse<OAuthProviderConfiguration>().Enabled))
         {
-            //here
-            var provider = providerName.ParseToProviderEnum();
-            if (provider.ToBase().GetConfiguration().Enabled)
-            
-            {
-                <text>
-                @if (provider == OAuthProvider.Whmcs)
+            if(provider.Name == "Whmcs")
                 {
                     <div class="btn-group" role="group">
-                        <a href="/OAuth/Login?provider=@provider">
-                            <button type="button" class="btn btn-@providerName" data-toggle="tooltip" data-placement="bottom" title="Sign in with @providerName" ><span class="fab fa-@(providerName.ToLower())"></span></button>
+                        <a href="/OAuth/Login/@provider.Id">
+                           <button type="button" class="btn btn-@provider.Name" data-toggle="tooltip" data-placement="bottom" title="Sign in with @provider.Name" ><span class="fab fa-@(provider.Name.ToLower())"></span></button>
                         </a>
                     </div>
 
                     continue;
                 }
                     <div class="btn-group" role="group">
-                        <a href="/OAuth/Login?provider=@provider">
-                            <button type="button" class="btn btn-@providerName" data-toggle="tooltip" data-placement="bottom" title="Sign in with @providerName" ><span class="fab fa-@(providerName.ToLower())"></span></button>
+                        <a href="/OAuth/Login/@provider.Id">
+                            <button type="button" class="btn btn-@provider.Name" data-toggle="tooltip" data-placement="bottom" title="Sign in with @provider.Name" ><span class="fab fa-@(provider.Name.ToLower())"></span></button>
                         </a>
                     </div>
-
-
-         </text>
-
-            }
         }
     }
     finally
@@ -63,4 +52,3 @@
     `
     recoverSection.append(socialsDiv);
 </script>
-
